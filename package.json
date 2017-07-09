@@ -1,0 +1,7 @@
+{
+    "name": "Writing",
+    "version": "1.0",
+    "dependencies": {
+        "sentence-generator": "^1.0.1"
+    }
+}
