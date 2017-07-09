@@ -125,14 +125,18 @@ button.shiny-text:active {
 
 #para-container {
     position:absolute;
-    transform:scale(1.1);
+    transform: scale(1.1);
+}
+
+body.m #para-container {
+    transform: scale(1);
 }
 
 #para-viewport
       { position:relative; overflow:hidden; width:100vw; height:100vh; }
 
 #bg-text {
-    font-size:0.6em;
+    font-size:0.7em;
     opacity:0.1;
     position:absolute;
     line-height:150%;
