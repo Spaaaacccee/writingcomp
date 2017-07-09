@@ -50,7 +50,7 @@ button.shiny-text {
     box-shadow: inset 0px 0px 10px #ff5200, 0px 0px 40px rgba(255, 82, 0, 0.7);
     font-family: 'Montserrat', 'Lato', 'Segoe UI', 'Helvetica Neue', 'Arial', sans-serif;
     cursor: pointer;
-    transform: translateY(calc(-30px + 6vh))
+    transform: translateY(calc(-40px + 6vh))
 }
 button.shiny-text:hover {
     background: #FFFE5F;
