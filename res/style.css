@@ -1,4 +1,4 @@
-    * {
+* {
     /* transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);*/
 }
 html,
@@ -39,11 +39,16 @@ body.m .shiny-text {
     top: 10px;
     transform: rotate(135deg);
 }
-button.shiny-text {
+#submit-container {
     position: absolute;
     bottom: calc(50px + 10vh);
     left: 50%;
-    width: auto;
+    transform: translateX(-50%);
+    text-align: center;
+}
+#submit {
+    display: inline-block;
+    width: 110px;
     background: #FFFB4F;
     outline: none;
     border: none;
@@ -52,18 +57,16 @@ button.shiny-text {
     font-size: 10;
     padding: 8px 12px;
     box-shadow: inset 0px 0px 10px #ff5200, 0px 0px 40px rgba(255, 82, 0, 0.7);
-    font-family: 'Montserrat', 'Lato', 'Segoe UI', 'Helvetica Neue', 'Arial', sans-serif;
     cursor: pointer;
-    transform: translateX(-50%) translateY(calc(0px - 6vh))
+    transform: translateY(calc(0px - 6vh))
 }
-button.shiny-text:hover {
+#submit:hover {
     background: #FFFE5F;
     color: #673413;
     box-shadow: inset 0px 0px 10px #ff5200, 0px 0px 40px rgba(255, 130, 20, 0.7);
 }
-button.shiny-text:active {
+#submit:active {
     box-shadow: inset 0px 0px 10px #ff5200, 0px 0px 40px rgba(255, 130, 20, 0.5);
-    ;
 }
 body.m button.shiny-text {
     transform: none;
@@ -81,11 +84,11 @@ body.m.std button.shiny-text {
     height: auto;
 }
 #logo-container,
-#more-info-container {
+.small-button-container {
     width: 100%;
     text-align: center;
     position: absolute;
-    top: 55px;
+    top: 45px;
     font-weight: 800;
     font-size: 8;
     letter-spacing: 10px;
@@ -94,9 +97,9 @@ body.m.std button.shiny-text {
     flex-direction: column;
     align-items: center;
 }
-#logo-container > #logo-name {
+#logo-name {
     padding-top: 15px;
-    width: 60%;
+    margin: 0 60px;
 }
 body.m #logo-name {
     display: none;
@@ -241,14 +244,19 @@ body.m #bg-circle:after {
 }
 #more-info-container {
     position: absolute;
-    bottom: 70px;
+    bottom: 20px;
     top: auto;
 }
-#more-info-label {
-    width: 100px;
+.small-button-label {
+    width: 200px;
     text-align: center
 }
-#more-info-chevron:before {
+.small-button-container {
+    cursor: pointer;
+    width: 200px;
+    height: 80px;
+}
+.chevron:before {
     border-color: #FAA616
 }
 #more-info {
@@ -262,7 +270,15 @@ body.m #bg-circle:after {
 }
 .exit-animation {
     animation-name: fadeOutUp;
-    animation-timing-function: cubic-bezier(0.55, 0.06, 0.68, 0.19);
+    animation-timing-function: cubic-bezier(.75,.01,.89,.49);
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;}
+
+.enter-animation {
+    animation-name: fadeInUp;
+    animation-timing-function: cubic-bezier(.16,.7,.48,.99);
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
     animation-iteration-count: 1;
+}

@@ -33,10 +33,17 @@ if (window.navigator.standalone) {
 })()
 
 window.onload = function () {
-    center - container
+var animationInterval = 50;
     $('#bg-text')[0].innerHTML = gen.take(210);
     $("#more-info-container").click(function(){
-
+        $(".animator").each(function(i){
+            var s = this;
+            setTimeout(
+            function(){
+                s.exitAnimation();
+            },
+            i*animationInterval)
+        })
     })
 
     if (!check) {
@@ -52,11 +59,12 @@ window.onload = function () {
 }
 
 HTMLElement.prototype.exitAnimation = function(){
+    var s = this;
     this.classList.add("exit-animation");
     setTimeout(
         function(){
-            this.style.display = "none";
-            this.classList.remove("exit-animation");
+            s.style.display = "none";
+            s.classList.remove("exit-animation");
         }
     ,500)
     this.removed = true;
