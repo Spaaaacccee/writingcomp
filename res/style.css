@@ -39,6 +39,9 @@ body.m .shiny-text {
     top: 10px;
     transform: rotate(135deg);
 }
+.chevron.inverted:before {
+    transform: rotate(-45deg);
+}
 #submit-container {
     position: absolute;
     bottom: calc(50px + 10vh);
@@ -259,26 +262,46 @@ body.m #bg-circle:after {
 .chevron:before {
     border-color: #FAA616
 }
+#less-info-container {
+    position: absolute;
+    bottom: auto;
+    top: 40px;
+}
+#less-info-container .small-button-label {
+    margin-top: 20px;
+}
 #more-info {
-    background-color: #071423;
+    /*background-color: #071423;*/
     height: 100%;
     width: 100vw;
     position: absolute;
-    top: 100%;
+    top: 0;
     left: 0;
     z-index: 10;
+    background: none;
+    pointer-events: none;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#more-info * {
+        pointer-events: all;
 }
 .exit-animation {
     animation-name: fadeOutUp;
-    animation-timing-function: cubic-bezier(.75,.01,.89,.49);
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
-    animation-iteration-count: 1;}
-
-.enter-animation {
-    animation-name: fadeInUp;
-    animation-timing-function: cubic-bezier(.16,.7,.48,.99);
+    animation-timing-function: cubic-bezier(.75, .01, .89, .49);
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
     animation-iteration-count: 1;
+}
+.enter-animation {
+    animation-name: fadeInUp;
+    animation-timing-function: cubic-bezier(.16,.7,.13,1);
+    animation-duration: 0.7s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+.animator-inverted, .animator {
+    display: none;
 }

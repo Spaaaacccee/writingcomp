@@ -8,10 +8,9 @@ var check = (function () {
     })(navigator.userAgent || navigator.vendor || window.opera);
     if (check) {
         document.body.classList.add('m');
-if (window.navigator.standalone) {
+        if (window.navigator.standalone) {
             document.body.classList.add("std")
-        } else {
-        }
+        } else {}
 
 
 
@@ -33,18 +32,68 @@ if (window.navigator.standalone) {
 })()
 
 window.onload = function () {
-var animationInterval = 50;
+    var animationInterval = 70;
+    var animationSwitchDelay = 500;
     $('#bg-text')[0].innerHTML = gen.take(210);
-    $("#more-info-container").click(function(){
-        $(".animator").each(function(i){
+
+
+    $(".animator").each(function (i) {
+        var s = this;
+        setTimeout(
+            function () {
+                s.enterAnimation();
+            },
+            i * animationInterval)
+    })
+
+
+
+    $("#more-info-container").click(function () {
+        $(".animator").each(function (i) {
             var s = this;
             setTimeout(
-            function(){
-                s.exitAnimation();
-            },
-            i*animationInterval)
+                function () {
+                    s.exitAnimation();
+                },
+                i * animationInterval)
         })
+        setTimeout(
+            function () {
+                $(".animator-inverted").each(function (i) {
+                    var s = this;
+                    setTimeout(
+                        function () {
+                            s.enterAnimation();
+                        },
+                        i * animationInterval)
+                })
+            }, animationSwitchDelay)
+
     })
+
+    $("#less-info-container").click(function () {
+        $(".animator-inverted").each(function (i) {
+            var s = this;
+            setTimeout(
+                function () {
+                    s.exitAnimation();
+                },
+                i * animationInterval)
+        })
+        setTimeout(
+            function () {
+                $(".animator").each(function (i) {
+                    var s = this;
+                    setTimeout(
+                        function () {
+                            s.enterAnimation();
+                        },
+                        i * animationInterval)
+                })
+            }, animationSwitchDelay)
+
+    })
+
 
     if (!check) {
         var parallaxifySettings = {
@@ -54,18 +103,33 @@ var animationInterval = 50;
         }
         $('#para-container').parallaxify(parallaxifySettings);
         $('#center-container').parallaxify(parallaxifySettings);
-    } else {
+    } else {}
+}
+
+HTMLElement.prototype.exitAnimation = function () {
+    if (this.removed !== true) {
+        var s = this;
+        this.classList.add("exit-animation");
+        setTimeout(
+            function () {
+                s.style.display = "none";
+                s.classList.remove("exit-animation");
+            }, 500)
+        this.removed = true;
     }
 }
 
-HTMLElement.prototype.exitAnimation = function(){
-    var s = this;
-    this.classList.add("exit-animation");
-    setTimeout(
-        function(){
-            s.style.display = "none";
-            s.classList.remove("exit-animation");
-        }
-    ,500)
-    this.removed = true;
+
+HTMLElement.prototype.enterAnimation = function () {
+    if (this.removed !== false) {
+        var s = this;
+
+        this.classList.add("enter-animation");
+        s.style.display = "block";
+        setTimeout(
+            function () {
+                s.classList.remove("enter-animation");
+            }, 700)
+        this.removed = false;
+    }
 }

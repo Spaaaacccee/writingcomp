@@ -577,17 +577,17 @@
 .fadeInRightBig {
     animation-name: fadeInRightBig;
 }
-}
-@keyframes fadeOutUp {
+@keyframes fadeInUp {
     0% {
         opacity: 0;
-        transform: translate3d(0, -500px, 0);
+        transform: translate3d(0, 500px, 0);
     }
-    70% {
+    20% {
         opacity: 0;
     }
     100% {
         opacity: 1;
+        transform: none
     }
 }
 .fadeInUp {
@@ -1059,7 +1059,6 @@
 }
 
 /* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
-
 @keyframes rollIn {
     from {
         opacity: 0;
@@ -1075,7 +1074,6 @@
 }
 
 /* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
-
 @keyframes rollOut {
     from {
         opacity: 1;
