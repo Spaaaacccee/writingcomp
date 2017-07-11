@@ -1,5 +1,5 @@
-* {
-    transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+    * {
+    /* transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);*/
 }
 html,
 body {
@@ -7,7 +7,7 @@ body {
     width: 100%;
     height: 100%;
     font-family: 'Montserrat', 'Lato', 'Segoe UI', 'Helvetica Neue', 'Arial', sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     margin: 0;
     overflow: hidden;
 }
@@ -17,28 +17,32 @@ body {
     font-weight: 300;
     letter-spacing: 5px;
     line-height: 200%;
-    text-shadow: 0px 0px 40px #ff5200, 0px 0px 80px #ff5200;
     width: 100%;
+    text-shadow: 0px 0px 40px #ff5200, 0px 0px 80px #ff5200;
 }
 .not-so {
     text-shadow: none;
 }
-
-.chevron::before {
-	border-style: solid;
-	border-width: 0.05em 0.05em 0 0;
-	content: '';
-	display: inline-block;
-	height: 0.45em;
-	left: 0.15em;
-	position: relative;
-	vertical-align: top;
-	width: 0.45em;
-    top: 0;
-	transform: rotate(135deg);
+body.m .shiny-text {
+    text-shadow: none;
 }
-
+.chevron::before {
+    border-style: solid;
+    border-width: 0.2em 0.2em 0 0;
+    content: '';
+    display: inline-block;
+    height: 1em;
+    left: 00em;
+    position: relative;
+    vertical-align: top;
+    width: 1em;
+    top: 10px;
+    transform: rotate(135deg);
+}
 button.shiny-text {
+    position: absolute;
+    bottom: calc(50px + 10vh);
+    left: 50%;
     width: auto;
     background: #FFFB4F;
     outline: none;
@@ -50,7 +54,7 @@ button.shiny-text {
     box-shadow: inset 0px 0px 10px #ff5200, 0px 0px 40px rgba(255, 82, 0, 0.7);
     font-family: 'Montserrat', 'Lato', 'Segoe UI', 'Helvetica Neue', 'Arial', sans-serif;
     cursor: pointer;
-    transform: translateY(calc(0px - 6vh))
+    transform: translateX(-50%) translateY(calc(0px - 6vh))
 }
 button.shiny-text:hover {
     background: #FFFE5F;
@@ -61,30 +65,42 @@ button.shiny-text:active {
     box-shadow: inset 0px 0px 10px #ff5200, 0px 0px 40px rgba(255, 130, 20, 0.5);
     ;
 }
-
-#container {
-    height:auto;
+body.m button.shiny-text {
+    transform: none;
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    bottom: auto;
+    left: auto;
+    z-index: 11;
 }
-
-#logo-container {
+body.m.std button.shiny-text {
+    top: 50px;
+}
+#container {
+    height: auto;
+}
+#logo-container,
+#more-info-container {
     width: 100%;
     text-align: center;
     position: absolute;
-    top: 30px;
+    top: 55px;
     font-weight: 800;
     font-size: 8;
     letter-spacing: 10px;
     line-height: 170%;
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 #logo-container > #logo-name {
-    padding-top: 10px;
-    width:60%;
+    padding-top: 15px;
+    width: 60%;
 }
-
+body.m #logo-name {
+    display: none;
+}
 #logo {
     background-image: url(logo.svg);
     width: 100%;
@@ -93,8 +109,34 @@ button.shiny-text:active {
     background-repeat: no-repeat;
     background-position: center;
 }
+body.m #logo {
+    background-image: url(hamburger.svg);
+    height: 36px;
+    width: 50px;
+    position: fixed;
+    left: 30px;
+    top: 30px;
+    transform: scale(0.7);
+    box-shadow: inset 0px 0px 200px rgba(255, 82, 0, 0.1), 0px 0px 40px rgba(255, 82, 0, 0.5);
+    z-index: 6;
+}
+body.m.std #logo {
+    top: 50px;
+}
+body.m #logo-container {
+    width: 100%;
+    height: 96px;
+    position: fixed;
+    background: #071423;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+body.m.std #logo-container {
+    padding-top: 20px;
+}
 #center {
-    width: calc(70% + 120px);
+    width: calc(70% + 150px);
     text-align: center;
 }
 #center-image {
@@ -104,46 +146,123 @@ button.shiny-text:active {
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-    transform: translateY(25%);
+    transform: translateY(20%) translateY(-20px);
 }
 #center-container {
-    transform: translateY(-15%)
+    transform: translateY(-10%)
 }
 #top {
     display: flex;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     overflow-x: hidden;
 }
+#top:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 1000px rgba(0, 10, 20, 1) inset;
+    z-index: 10;
+    content: "";
+    display: none;
+}
+body.m #top:after {
+    opacity: 0;
+}
 #subheading {
     letter-spacing: 12px;
-    transform: translateY(40px) translateY(-10.5vh)
+    transform: translateY(-50px)
 }
-
+body.m #subheading {
+    font-size: 8px;
+}
 #para-container {
-    position:absolute;
+    position: absolute;
     transform: scale(1.1);
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 1000px rgba(0, 10, 20, 1) inset;
 }
-
 body.m #para-container {
     transform: scale(1);
+    box-shadow: 0 0 100px rgba(0, 10, 20, 1) inset;
 }
-
-#para-viewport
-      { position:relative; overflow:hidden; width:100vw; height:100vh; }
-
 #bg-text {
-    font-size:0.7em;
-    opacity:0.1;
-    position:absolute;
-    line-height:150%;
+    font-size: 0.8em;
+    opacity: 0.1;
+    position: absolute;
+    line-height: 170%;
     letter-spacing: 0.6px;
-    transition:none;
-    width:auto;
-    width:100%;
-    height:100%;
+    transition: none;
+    width: auto;
+    width: 100vw;
+    height: 100vh;
     text-align: justify;
 }
+#bg-circle {
+    background: none;
+    width: calc(400px - 5vw);
+    height: calc(400px - 5vw);
+    top: 50%;
+    left: 50%;
+    position: absolute;
+}
+#bg-circle:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #071423;
+    transform: translateX(-50%) translateY(-50%);
+    border-radius: 200px;
+    position: absolute;
+    z-index: 1;
+}
+body.m #bg-circle {
+    display: none;
+    background: #071423;
+    width: 300px;
+    height: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    position: absolute;
+    border-radius: 200px;
+}
+body.m #bg-circle:after {
+    content: none;
+}
+#more-info-container {
+    position: absolute;
+    bottom: 70px;
+    top: auto;
+}
+#more-info-label {
+    width: 100px;
+    text-align: center
+}
+#more-info-chevron:before {
+    border-color: #FAA616
+}
+#more-info {
+    background-color: #071423;
+    height: 100%;
+    width: 100vw;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 10;
+}
+.exit-animation {
+    animation-name: fadeOutUp;
+    animation-timing-function: cubic-bezier(0.55, 0.06, 0.68, 0.19);
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;

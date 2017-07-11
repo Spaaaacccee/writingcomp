@@ -1,21 +1,25 @@
 <html>
 
 <head>
+    <title>
+    Writing Competition 2017
+    </title>
     <link rel="stylesheet" type="text/css" href="res/style.css" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="res/animate.css" />
     <meta name="viewport" content="width=device-width, initial-scale=0.85, user-scalable=no">
-    <meta name=”apple-mobile-web-app-capable” content=”yes”>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 </head>
 
-<body>
+<body >
     <div id="container">
         <div id="top">
             <div id="para-container">
-            <div id="para-viewport">
-            <div id="bg-text" data-parallaxify-range="-20" class="not-so shiny-text">
+
+            <div id="bg-text" data-parallaxify-range="-30" class="not-so shiny-text" data-0="transform:translateY(0px)"  data-1000="transform:translateY(50px)">
                 
-            </div>
-            </div>
+            </div> <div id="bg-circle" data-parallaxify-range="-15" ></div>
             </div>
             <div id="logo-container" class="not-so shiny-text">
                 <div id="logo">
@@ -26,28 +30,36 @@
             <div id="center">
 
                 <div id="center-container">
-                    <div id="center-image">
+                    <div data-parallaxify-range="30"><div id="center-image">
 
-                    </div>
-                    <div id="subheading" class="shiny-text">
+                        </div></div>
+                    <div data-parallaxify-range="15"><div id="subheading" class="shiny-text">
                         Competition<br/>2017
-                    </div>
+                    </div></div>
                 </div>
-                <div>
+
                     <button id="submit" class="shiny-text">Apply Now</button>
+
+            </div>
+            <div id="more-info-container" class="not-so shiny-text">
+
+                <div id="more-info-label">More<br/>Info</div>
+                            <div class="chevron" id="more-info-chevron">
                 </div>
             </div>
 
         </div>
-        <section>
+        <section id="more-info">
 
         </section>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script src="src/parallixify.js"></script>
+        <script src="src/parallaxify.js"></script>
     <script src="src/aesopsFables.js"></script>
     <script src="src/sentences.js"></script>
+    <script src="src/skrollr.js"></script>
     <script src="src/index.js"></script>
+
 </body>
 
 </html>

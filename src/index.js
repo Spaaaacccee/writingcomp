@@ -8,6 +8,13 @@ var check = (function () {
     })(navigator.userAgent || navigator.vendor || window.opera);
     if (check) {
         document.body.classList.add('m');
+if (window.navigator.standalone) {
+            document.body.classList.add("std")
+        } else {
+        }
+
+
+
     } else {
         $(window).resize(function () {
             if (this.resizeTO) clearTimeout(this.resizeTO);
@@ -22,16 +29,35 @@ var check = (function () {
             }, 50);
         });
     }
+    return check;
 })()
 
 window.onload = function () {
+    center - container
+    $('#bg-text')[0].innerHTML = gen.take(210);
+    $("#more-info-container").click(function(){
 
-    $('#bg-text')[0].innerHTML = gen.take(410);
+    })
+
     if (!check) {
-        $('#para-viewport').parallaxify({
+        var parallaxifySettings = {
             positionProperty: 'transform',
             responsive: true,
             alphaFilter: 0.7
-        });
+        }
+        $('#para-container').parallaxify(parallaxifySettings);
+        $('#center-container').parallaxify(parallaxifySettings);
+    } else {
     }
+}
+
+HTMLElement.prototype.exitAnimation = function(){
+    this.classList.add("exit-animation");
+    setTimeout(
+        function(){
+            this.style.display = "none";
+            this.classList.remove("exit-animation");
+        }
+    ,500)
+    this.removed = true;
 }

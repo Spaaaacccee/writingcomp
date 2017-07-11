@@ -13,7 +13,7 @@
  ;(function($, window, document, undefined) {
 
 	var pluginName = 'parallaxify',
-		maxFPS = 30,
+		maxFPS = 60,
 		defaults = {
 			positionProperty: 'position',
 			horizontalParallax: true,
