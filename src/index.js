@@ -207,7 +207,7 @@
             var delta = evt.detail ? evt.detail * (-40) : evt.wheelDelta //check for detail first, because it is used by Opera and FF
 
             if (delta > 0) {
-                if ($("#container").hasClass("more") && ($("#more-info").scrollTop() == 5)) {
+                if ($("#container").hasClass("more") && ($("#more-info").scrollTop() <= 5)) {
                     showLessInfo();
                 }
             } else {
