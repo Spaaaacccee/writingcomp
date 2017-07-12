@@ -1,6 +1,10 @@
 * {
     /* transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);*/
 }
+
+html {
+    -ms-zoom: 125%;
+}
 html,
 body {
     background: #071423;
@@ -11,6 +15,7 @@ body {
     margin: 0;
     overflow: hidden;
     text-align: center;
+    transform: translateZ(0px);
 }
 .shiny-text,
 h1,
@@ -44,13 +49,20 @@ p {
     font-size: 1.6em;
 }
 .huge-text {
-    font-size: 12em;
-    margin-bottom: -50px;
+    font-size: 16em;
+    margin-bottom: -70px;
+    margin-top: -40px;
     font-weight: 100;
 }
-body.m .shiny-text {
+body.m .shiny-text,
+body.m .shiny {
     text-shadow: none;
 }
+
+body.m .shiny {
+    text-shadow: 0px 0px 40px #ff5200;
+}
+
 .chevron::before {
     border-style: solid;
     border-width: 0.2em 0.2em 0 0;
@@ -92,7 +104,7 @@ body.m .shiny-text {
     padding: 8px 12px;
     box-shadow: inset 0px 0px 10px #ff5200, 0px 0px 40px rgba(255, 82, 0, 0.7);
     cursor: pointer;
-    transform: translateY(calc(0px - 6vh))
+    transform: translateY(-70px) translateY(4vh);
 }
 .submit:hover {
     background: #FFFE5F;
@@ -123,6 +135,7 @@ body.m.std button.shiny-text {
     text-align: center;
     position: absolute;
     top: 45px;
+    left: 0;
     font-weight: 800;
     font-size: 8;
     letter-spacing: 10px;
@@ -135,9 +148,12 @@ body.m.std button.shiny-text {
     padding-top: 15px;
     margin: 0 60px;
 }
+
+/*
 body.m #logo-name {
     display: none;
-}
+}*/
+
 #logo {
     background-image: url(logo.svg);
     width: 100%;
@@ -146,6 +162,8 @@ body.m #logo-name {
     background-repeat: no-repeat;
     background-position: center;
 }
+
+/*
 body.m #logo {
     background-image: url(hamburger.svg);
     height: 36px;
@@ -172,14 +190,17 @@ body.m #logo-container {
 body.m.std #logo-container {
     padding-top: 20px;
 }
+*/
+
 #center {
     width: calc(70% + 150px);
     text-align: center;
 }
 #center-image {
+    background-image: url(legacy/writing_lowres.png);
+    background-image: url(legacy/writing.png);
     background-image: url(writing.svg);
-    width: 100%;
-    height: 50%;
+    height: 50vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -195,14 +216,23 @@ body.m.std #logo-container {
     display: flex;
     width: 100vw;
     height: 100vh;
+    min-height: 512px;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    overflow-x: hidden;
+    overflow: hidden;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 12;
+}
+
+body.m:not(.std) #foreground {
+    transform:translateY(-30px);
+}
+
+#top {
+    min-height: 512px;
 }
 #top:after {
     position: absolute;
@@ -214,6 +244,7 @@ body.m.std #logo-container {
     z-index: 10;
     content: "";
     display: none;
+    min-height: 512px;
 }
 body.m #top:after {
     opacity: 0;
@@ -234,6 +265,13 @@ body.m #subheading {
     width: 100%;
     height: 100%;
     box-shadow: 0 0 1000px rgba(0, 10, 20, 1) inset;
+    transition: all 1s ease-in-out;
+}
+#container.more #para-container {
+    -webkit-filter: blur(10px);
+    filter: blur(10px);
+    opacity: 0;
+    transform: translateY(-100px) scale(1.1)
 }
 body.m #para-container {
     transform: scale(1);
@@ -297,6 +335,8 @@ body.m #bg-circle:after {
     cursor: pointer;
     width: 200px;
     height: 80px;
+    width: 100%;
+    text-align: center;
 }
 .chevron:before {
     border-color: #FAA616
@@ -323,6 +363,7 @@ body.m #bg-circle:after {
     flex-direction: column;
     align-items: center;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 #more-info * {
     pointer-events: all;
@@ -345,15 +386,21 @@ body.m #bg-circle:after {
     padding: 0px 10px
 }
 #competition-dates {
-    margin-top: 80px;
+    margin-top: 40px;
     width: 70%;
+}
+body.ios #competition-dates {
+    margin-top: 450px;
+}
+body.std #competition-dates {
+    margin-top: 250px;
 }
 #competition-date-details > div {
     display: flex;
     flex-direction: column-reverse;
     align-items: baseline;
     padding: 0 1px;
-    flex: initial;
+    flex: inherit;
     width: 105px;
 }
 #competition-date-details > div > h1,
@@ -370,15 +417,21 @@ body.m #bg-circle:after {
 }
 #submit2 {
     margin-top: 100px;
+    margin-bottom: 50px;
 }
-.exit-animation, .exit-animation-alt {
+body.ios #submit2 {
+    margin-top: 200px;
+}
+.exit-animation,
+.exit-animation-alt {
     animation-name: fadeOutUp;
     animation-timing-function: cubic-bezier(.75, .01, .89, .49);
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
     animation-iteration-count: 1;
 }
-.enter-animation, .enter-animation-alt {
+.enter-animation,
+.enter-animation-alt {
     animation-name: fadeInUp;
     animation-timing-function: cubic-bezier(.16, .7, .13, 1);
     animation-duration: 0.7s;
@@ -394,4 +447,5 @@ body.m #bg-circle:after {
 .animator-inverted,
 .animator {
     display: none;
+    will-change: transform;
 }
