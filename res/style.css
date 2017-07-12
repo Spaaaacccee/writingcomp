@@ -6,12 +6,15 @@ body {
     background: #071423;
     width: 100%;
     height: 100%;
-    font-family: 'Montserrat', 'Lato', 'Segoe UI', 'Helvetica Neue', 'Arial', sans-serif;
-    font-size: 12px;
+    font-family: 'Montserrat', 'Lato', 'Segoe UI', 'Helvetica Neue', 'Arial', 'Comic Sans', sans-serif;
+    font-size: 10px;
     margin: 0;
     overflow: hidden;
+    text-align: center;
 }
-.shiny-text {
+.shiny-text,
+h1,
+p {
     color: #FAA616;
     text-transform: uppercase;
     font-weight: 300;
@@ -20,8 +23,30 @@ body {
     width: 100%;
     text-shadow: 0px 0px 40px #ff5200, 0px 0px 80px #ff5200;
 }
-.not-so {
+.not-so,
+h1,
+p {
     text-shadow: none;
+    margin-top: 0px;
+}
+h1 {
+    font-size: inherit;
+    margin-bottom: 0px;
+}
+p {
+    font-weight: 500;
+}
+.shiny {
+    text-shadow: 0px 0px 40px #ff5200, 0px 0px 80px #ff5200;
+}
+.extra-bold {
+    font-weight: 500;
+    font-size: 1.6em;
+}
+.huge-text {
+    font-size: 12em;
+    margin-bottom: -50px;
+    font-weight: 100;
 }
 body.m .shiny-text {
     text-shadow: none;
@@ -42,6 +67,12 @@ body.m .shiny-text {
 .chevron.inverted:before {
     transform: rotate(-45deg);
 }
+.left-align {
+    text-align: left;
+}
+.right-align {
+    text-align: right;
+}
 #submit-container {
     position: absolute;
     bottom: calc(50px + 10vh);
@@ -49,7 +80,7 @@ body.m .shiny-text {
     transform: translateX(-50%);
     text-align: center;
 }
-#submit {
+.submit {
     display: inline-block;
     width: 110px;
     background: #FFFB4F;
@@ -63,12 +94,12 @@ body.m .shiny-text {
     cursor: pointer;
     transform: translateY(calc(0px - 6vh))
 }
-#submit:hover {
+.submit:hover {
     background: #FFFE5F;
     color: #673413;
     box-shadow: inset 0px 0px 10px #ff5200, 0px 0px 40px rgba(255, 130, 20, 0.7);
 }
-#submit:active {
+.submit:active {
     box-shadow: inset 0px 0px 10px #ff5200, 0px 0px 40px rgba(255, 130, 20, 0.5);
 }
 body.m button.shiny-text {
@@ -157,7 +188,10 @@ body.m.std #logo-container {
 #center-container {
     transform: translateY(-10%)
 }
-#top {
+.more #top {
+    pointer-events: none;
+}
+#foreground {
     display: flex;
     width: 100vw;
     height: 100vh;
@@ -165,6 +199,10 @@ body.m.std #logo-container {
     justify-content: center;
     flex-direction: column;
     overflow-x: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 12;
 }
 #top:after {
     position: absolute;
@@ -182,7 +220,8 @@ body.m #top:after {
 }
 #subheading {
     letter-spacing: 12px;
-    transform: translateY(-50px)
+    transform: translateY(-50px);
+    font-size: 1.2em;
 }
 body.m #subheading {
     font-size: 8px;
@@ -277,31 +316,82 @@ body.m #bg-circle:after {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 10;
+    z-index: 11;
     background: none;
-    pointer-events: none;
-
+    pointer-events: fill;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: auto;
 }
 #more-info * {
-        pointer-events: all;
+    pointer-events: all;
 }
-.exit-animation {
+#more-info-content {
+    margin-top: 110px;
+    width: 80%;
+}
+#style-length-details,
+#competition-date-details {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: baseline;
+}
+#style-length-details > div,
+#competition-date-details > div {
+    flex: 1;
+    padding: 0px 10px
+}
+#competition-dates {
+    margin-top: 80px;
+    width: 70%;
+}
+#competition-date-details > div {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: baseline;
+    padding: 0 1px;
+    flex: initial;
+    width: 105px;
+}
+#competition-date-details > div > h1,
+#competition-date-details > div > p {
+    margin: 0;
+}
+#competition-date-details > div > p {
+    font-size: 1.6em;
+    margin-bottom: -5px;
+    font-weight: 500;
+}
+#competition-date-details > div > h1 {
+    margin-bottom: 10px;
+}
+#submit2 {
+    margin-top: 100px;
+}
+.exit-animation, .exit-animation-alt {
     animation-name: fadeOutUp;
     animation-timing-function: cubic-bezier(.75, .01, .89, .49);
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
     animation-iteration-count: 1;
 }
-.enter-animation {
+.enter-animation, .enter-animation-alt {
     animation-name: fadeInUp;
-    animation-timing-function: cubic-bezier(.16,.7,.13,1);
+    animation-timing-function: cubic-bezier(.16, .7, .13, 1);
     animation-duration: 0.7s;
     animation-fill-mode: forwards;
     animation-iteration-count: 1;
 }
-.animator-inverted, .animator {
+.exit-animation-alt {
+    animation-name: fadeOutDown;
+}
+.enter-animation-alt {
+    animation-name: fadeInDown;
+}
+.animator-inverted,
+.animator {
     display: none;
 }

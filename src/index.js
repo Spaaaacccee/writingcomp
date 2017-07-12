@@ -1,3 +1,5 @@
+jQuery.fn.reverse = [].reverse;
+
 var gen = sentenceGenerator(txt);
 var indexedWords = txt.split(" ");
 
@@ -30,10 +32,59 @@ var check = (function () {
     }
     return check;
 })()
+var animationInterval = 70;
+var animationSwitchDelay = 500;
+
+function showMoreInfo() {
+    $("#container").toggleClass("more")
+    $(".animator").each(function (i) {
+        var s = this;
+        setTimeout(
+            function () {
+                s.exitAnimation();
+            },
+            i * animationInterval)
+    })
+    setTimeout(
+        function () {
+            $(".animator-inverted").each(function (i) {
+                var s = this;
+                setTimeout(
+                    function () {
+                        s.enterAnimation();
+                    },
+                    i * animationInterval)
+            })
+        }, animationSwitchDelay)
+
+}
+
+function showLessInfo() {
+    $("#container").toggleClass("more")
+    $(".animator-inverted").reverse().each(function (i) {
+        var s = this;
+        setTimeout(
+            function () {
+                s.exitAnimation("-alt");
+            },
+            i * animationInterval)
+    })
+    setTimeout(
+        function () {
+            $(".animator").reverse().each(function (i) {
+                var s = this;
+                setTimeout(
+                    function () {
+                        s.enterAnimation("-alt");
+                    },
+                    i * animationInterval)
+            })
+        }, animationSwitchDelay)
+
+}
 
 window.onload = function () {
-    var animationInterval = 70;
-    var animationSwitchDelay = 500;
+
     $('#bg-text')[0].innerHTML = gen.take(210);
 
 
@@ -48,51 +99,9 @@ window.onload = function () {
 
 
 
-    $("#more-info-container").click(function () {
-        $(".animator").each(function (i) {
-            var s = this;
-            setTimeout(
-                function () {
-                    s.exitAnimation();
-                },
-                i * animationInterval)
-        })
-        setTimeout(
-            function () {
-                $(".animator-inverted").each(function (i) {
-                    var s = this;
-                    setTimeout(
-                        function () {
-                            s.enterAnimation();
-                        },
-                        i * animationInterval)
-                })
-            }, animationSwitchDelay)
+    $("#more-info-container").click(showMoreInfo)
 
-    })
-
-    $("#less-info-container").click(function () {
-        $(".animator-inverted").each(function (i) {
-            var s = this;
-            setTimeout(
-                function () {
-                    s.exitAnimation();
-                },
-                i * animationInterval)
-        })
-        setTimeout(
-            function () {
-                $(".animator").each(function (i) {
-                    var s = this;
-                    setTimeout(
-                        function () {
-                            s.enterAnimation();
-                        },
-                        i * animationInterval)
-                })
-            }, animationSwitchDelay)
-
-    })
+    $("#less-info-container").click(showLessInfo)
 
 
     if (!check) {
@@ -101,35 +110,69 @@ window.onload = function () {
             responsive: true,
             alphaFilter: 0.7
         }
-        $('#para-container').parallaxify(parallaxifySettings);
-        $('#center-container').parallaxify(parallaxifySettings);
+        $(document.body).parallaxify(parallaxifySettings);
+        //$('#center-container').parallaxify(parallaxifySettings);
     } else {}
 }
 
-HTMLElement.prototype.exitAnimation = function () {
+HTMLElement.prototype.exitAnimation = function (a) {
     if (this.removed !== true) {
         var s = this;
-        this.classList.add("exit-animation");
+        this.classList.add("exit-animation" + (a||""));
         setTimeout(
             function () {
                 s.style.display = "none";
-                s.classList.remove("exit-animation");
+                s.classList.remove("exit-animation" + (a||""));
             }, 500)
         this.removed = true;
     }
 }
 
 
-HTMLElement.prototype.enterAnimation = function () {
+HTMLElement.prototype.enterAnimation = function (a) {
     if (this.removed !== false) {
         var s = this;
 
-        this.classList.add("enter-animation");
+        this.classList.add("enter-animation" + (a||""));
         s.style.display = "block";
         setTimeout(
             function () {
-                s.classList.remove("enter-animation");
+                s.classList.remove("enter-animation" + (a||""));
             }, 700)
         this.removed = false;
     }
 }
+
+var mousewheelevt = (/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
+var decay = new (function(){
+    var s = this;
+    var timeout = 1500;
+    var lock = false;
+    this.set = function(){
+        lock = true;
+        setTimeout(function(){
+            lock = false;
+        },timeout)
+    }
+    this.get = function(){
+        return lock;
+    }
+})()
+$(document.body).bind(mousewheelevt, function (e) {
+    if (!decay.get()) {
+         var evt = window.event || e //equalize event object
+    evt = evt.originalEvent ? evt.originalEvent : evt; //convert to originalEvent if possible
+    var delta = evt.detail ? evt.detail * (-40) : evt.wheelDelta //check for detail first, because it is used by Opera and FF
+
+    if (delta > 0) {
+        if ($("#container").hasClass("more") && ($("#more-info").scrollTop() == 0)) {
+            showLessInfo();
+        }
+    } else {
+                if (!$("#container").hasClass("more")) {
+            showMoreInfo();
+        }
+    }
+    decay.set();
+    }
+});
