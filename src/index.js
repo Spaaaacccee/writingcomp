@@ -200,7 +200,7 @@
     var mousewheelevt = (/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
     var decay = new(function () {
         var s = this;
-        var timeout = 1500;
+        var timeout = 3000;
         var lastTimeout;
         var lock = false;
         this.set = function () {
