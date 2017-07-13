@@ -122,19 +122,30 @@
         }, 500)
         $("#more-info-container").click(showMoreInfo)
         $("#less-info-container").click(showLessInfo)
-        if (!check) {
-            var parallaxifySettings = {
-                positionProperty: 'transform',
-                responsive: true,
-                alphaFilter: 0.7,
-                useGyroscope: true,
-                motionType: 'natural',
-                mouseMotionType: 'gaussian'
+        var parallaxifySettings = {
+            positionProperty: 'transform',
+            responsive: true,
+            alphaFilter: 0.7,
+            useGyroscope: true,
+            motionType: 'natural',
 
-            }
-            $(document.body).parallaxify(parallaxifySettings);
+
+        }
+        if (check) {
             //$('#center-container').parallaxify(parallaxifySettings);
-        } else {}
+            $.extend(parallaxifySettings, {
+                motionAngleX: 60, // (0 < motionAngle < 90) delta angle that is used to render max parallax in this direction
+                motionAngleY: 30,
+                mouseMotionType: 'linear',
+            })
+        } else {
+            $.extend(parallaxifySettings, {
+                mouseMotionType: 'gaussian',
+            })
+        }
+
+        $(document.body).parallaxify(parallaxifySettings);
+
 
 
         var date1 = new Date.now();
