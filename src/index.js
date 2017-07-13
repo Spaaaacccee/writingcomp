@@ -110,7 +110,7 @@
 
     window.onload = function () {
 
-        $("a").each(function(){
+        $(".submit a").each(function(){
             this.href = address;
         })
 
