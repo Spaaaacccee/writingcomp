@@ -109,6 +109,11 @@
     }
 
     window.onload = function () {
+
+        $("a").each(function(){
+            this.href = address;
+        })
+
         $('#bg-text')[0].innerHTML = gen.take(410);
         setTimeout(function () {
             $(".animator").each(function (i) {
