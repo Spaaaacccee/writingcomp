@@ -154,16 +154,17 @@
 
 
         var date1 = new Date.now();
-        var date2 = new Date.parse("21/08/2017");
+        var date2 = new Date.parse("28/08/2017");
         var date3 = new Date.parse("28/08/2017");
         var timeDiff = date2.getTime() - date1.getTime();
         if (timeDiff <= 0) {
             timeDiff = date3.getTime() - date1.getTime()
         };
-        if (timeDiff <= 0) {
-            timeDiff = 0;
-        }
         var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        if (timeDiff <= 0) {
+            diffDays = 0;
+        }
+
 
         $("#days-left-counter").html(diffDays);
 
